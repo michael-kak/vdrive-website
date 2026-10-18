@@ -1,0 +1,181 @@
+{
+  "tested_at": "2026-10-18T16:32:47.332Z",
+  "target": "http://127.0.0.1:18741/studio/",
+  "results": [
+    {
+      "name": "live_catalog_inside_page",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "catalog_has_real_records",
+      "passed": true,
+      "detail": {
+        "count": 4
+      }
+    },
+    {
+      "name": "source_disclosed",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "one_main_heading",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "no_horizontal_overflow_1440",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "search_filters_bmw",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "budget_filter_80000",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "filter_reset_restores_catalog",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "price_order_is_ascending",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "save_car_updates_counter",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "saved_only_view",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "comparison_dialog_two_cars",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "vehicle_detail_dialog_opens",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "vehicle_gallery_changes_photo",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "suspect_fuel_not_rendered",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "escape_closes_dialog",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "sold_separate_and_honest",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "sold_view_hides_active_inventory",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "trade_in_intent_selected",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "contact_prepares_whatsapp_without_sending",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "all_loaded_images_after_scroll",
+      "passed": true,
+      "detail": {
+        "broken": []
+      }
+    },
+    {
+      "name": "no_horizontal_overflow_320",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "no_horizontal_overflow_390",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "mobile_menu_opens",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "mobile_menu_closes_after_navigation",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "no_horizontal_overflow_768",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "reduced_motion_content_visible",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "foreign_catalog_rejected",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "no_browser_javascript_errors",
+      "passed": true,
+      "detail": {
+        "errors": []
+      }
+    }
+  ],
+  "passed": 29,
+  "failed": 0,
+  "errors": [],
+  "responses": [
+    {
+      "status": 200,
+      "cors": "*"
+    },
+    {
+      "status": 200,
+      "cors": "*"
+    },
+    {
+      "status": 200,
+      "cors": "*"
+    }
+  ],
+  "limits": [
+    "Browser test is not live Xanadria CRM integration.",
+    "Source is the existing public Keez catalog.",
+    "Sold archive contains no records until connected.",
+    "No real WhatsApp or contact message was sent.",
+    "Visual review is not a WCAG certification or field Core Web Vitals measurement."
+  ]
+}
