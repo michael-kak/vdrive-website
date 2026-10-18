@@ -1,6 +1,6 @@
 {
-  "tested_at": "2026-10-18T16:32:47.332Z",
-  "target": "http://127.0.0.1:18741/studio/",
+  "tested_at": "2026-10-18T16:58:03.385Z",
+  "target": "http://127.0.0.1:18742/studio/",
   "results": [
     {
       "name": "live_catalog_inside_page",
@@ -158,10 +158,6 @@
   "failed": 0,
   "errors": [],
   "responses": [
-    {
-      "status": 200,
-      "cors": "*"
-    },
     {
       "status": 200,
       "cors": "*"
