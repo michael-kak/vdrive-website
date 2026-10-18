@@ -10,3 +10,43 @@
 
 /* Real logo blends with the page rather than a white image rectangle. */
 .header,.brand,.footer-top{background:var(--paper)}
+
+/* 2026-10-18 mobile screenshot acceptance fixes */
+.arrow-circle,.stage-controls button,.details-btn span,.filter-submit,.send-cta span,.trade-number span,.hero-mark span,.gallery-bottom a,.main-cta span,.phone-large{font-family:Arial,Helvetica,sans-serif;font-variant-emoji:text}
+.hero-mark{font-family:Arial,Helvetica,sans-serif;white-space:nowrap}
+.hero-mark span{font-family:Arial,Helvetica,sans-serif;font-variant-emoji:text}
+.trade-number span{font-variant-emoji:text}
+@media(max-width:760px){
+ .header{overflow:visible}
+ .hero-top{padding-top:24px}
+ .hero h1{font-size:clamp(47px,10vw,68px);line-height:1.08}
+ .hero-bottom{align-items:center}
+ .hero-bottom .main-cta{gap:9px;flex-shrink:0}
+ .hero-bottom .arrow-circle{font-size:22px}
+ .hero-stage{height:57svh;min-height:360px;max-height:520px}
+ .hero-mark{font-size:clamp(70px,24vw,140px);bottom:96px;left:12px;letter-spacing:-.095em;max-width:calc(100% - 24px)}
+ .hero-mark span{font-size:.42em;vertical-align:middle;margin-left:8px}
+ .stage-caption{bottom:19px}
+ .stage-controls{gap:6px}
+ .stage-controls button{font-size:21px}
+ .gallery-rail{overscroll-behavior-inline:contain}
+ .gallery-rail figure{flex-basis:85%}
+ .gallery-rail figure:nth-child(2){flex-basis:78%}
+ .gallery-rail img{height:clamp(230px,67vw,360px)}
+ .trade-grid{gap:8px}
+ .trade-number{font-size:clamp(65px,19vw,100px);line-height:1.1;display:flex;align-items:center;justify-content:flex-start;gap:12px;max-width:100%;letter-spacing:-.09em}
+ .trade-number span{font-size:.65em;line-height:1;margin:0;padding:0;flex-shrink:0}
+ .trade-copy{margin-top:8px}
+ .trade-copy h2{font-size:clamp(39px,10vw,53px)}
+ .phone-large{font-size:clamp(21px,6vw,29px);white-space:normal}
+ .contact-grid{gap:25px}
+ .contact h2{font-size:clamp(40px,10vw,54px)}
+ .footer-top>div{flex-wrap:wrap}
+}
+@media(max-width:375px){
+ .hero h1{font-size:46px}
+ .hero-bottom p{font-size:10px}
+ .hero-mark{font-size:22vw}
+ .stage-caption strong{font-size:11px}
+ .trade-number{font-size:18vw}
+}
