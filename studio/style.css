@@ -50,3 +50,39 @@
  .stage-caption strong{font-size:11px}
  .trade-number{font-size:18vw}
 }
+
+/* Direct contact entry: Yuval, phone and WhatsApp. */
+.contact-link{font-family:inherit;background:none}
+.yuval-contact-label{font-size:12px;color:#52686d;margin:22px 0 0}
+.contact-options-inline{display:flex;flex-wrap:wrap;gap:11px;margin:7px 0 28px}
+.contact-options-inline a{font-size:12px;background:#182b33;color:#fff;padding:11px 16px;display:inline-flex;align-items:center;justify-content:center;min-height:44px}
+.contact-options-inline a:last-child{background:#e7f5f3;color:#123d36;border:1px solid #9ac8bb}
+.contact-dialog{width:min(570px,94vw);max-width:570px;padding:60px 35px 35px}
+.contact-dialog h2{font-size:clamp(32px,4vw,48px);margin:22px 0 16px}
+.contact-dialog>p:not(.kicker){font-size:13px;color:#627077;margin-bottom:25px}
+.contact-choice-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.contact-choice{border:1px solid #aeb9b8;min-height:150px;padding:20px;display:flex;flex-direction:column;justify-content:space-between;gap:14px}
+.contact-choice>span:first-child{font-size:12px}
+.contact-choice strong{font-size:18px;font-weight:700}
+.contact-choice>span:last-child{font-family:Arial,sans-serif;font-variant-emoji:text;font-size:21px;align-self:flex-end}
+.contact-choice:hover,.contact-choice:focus-visible{background:#20353c;color:white;border-color:#20353c}
+.contact-choice-wa{background:#dcf5ea;border-color:#a1d2c1}
+.contact-dialog .contact-dialog-note{font-size:10px!important;margin:20px 0 0!important;line-height:1.65}
+@media(max-width:480px){.contact-dialog{padding:62px 20px 26px}.contact-choice-grid{grid-template-columns:1fr}.contact-choice{min-height:112px;gap:8px;padding:16px}.contact-choice strong{font-size:17px}.contact-dialog h2{font-size:34px}.contact-options-inline a{flex:1}}
+/* Keep contact visible on iPhone instead of burying it in the menu. */
+@media(max-width:760px){
+ .header .contact-link{display:inline-flex;gap:5px;font-size:11px;white-space:nowrap;padding:7px 0}
+ .header .contact-link span{font-size:17px}
+ .header-actions{gap:10px}
+ .header .real-logo{width:108px;height:62px}
+ .header .saved-btn{gap:3px;font-size:20px}
+ .header .saved-btn span{font-size:10px}
+ .header .menu-toggle{width:23px}
+ .header .menu-toggle span{width:23px}
+}
+@media(max-width:375px){
+ .header{margin-inline:14px}
+ .header .real-logo{width:101px}
+ .header-actions{gap:7px}
+ .header .contact-link{font-size:10px;gap:3px}
+}
