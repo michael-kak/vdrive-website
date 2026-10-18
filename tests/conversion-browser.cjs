@@ -1,0 +1,78 @@
+/* Isolated browser tests. No public deploy, lead submission, call or message. */
+const puppeteer=require('puppeteer'),fs=require('node:fs'),path=require('node:path');
+const {DatabaseSync}=require('node:sqlite');
+const {pathToFileURL}=require('node:url');
+const root=path.resolve(__dirname,'..'),base='http://127.0.0.1:18744/studio/';
+const results=[],errors=[];let browser;
+const check=(name,value,detail)=>{results.push({name,passed:!!value,detail});console.log((value?'PASS ':'FAIL ')+name);if(!value)throw Error(name)};
+const sleep=ms=>new Promise(r=>setTimeout(r,ms));
+const watchdog=setTimeout(async()=>{console.error('BROWSER_TEST_TIMEOUT');if(browser)await browser.close().catch(()=>{});process.exit(1)},150000);watchdog.unref();
+(async()=>{
+ const {calculateLoan}=await import(pathToFileURL(path.join(root,'studio/finance-core.mjs')));
+ const {handleLead}=await import(pathToFileURL(path.join(root,'integrations/sites-leads/handler.mjs')));
+ const sql=new DatabaseSync(':memory:');sql.exec(fs.readFileSync(path.join(root,'integrations/sites-leads/schema.sql'),'utf8'));
+ const db={withSession(){return this},prepare(query){return{bind(...args){return{query,args,first:async()=>sql.prepare(query).get(...args)||null}}}},async batch(queries){sql.exec('BEGIN');try{for(const q of queries)sql.prepare(q.query).run(...q.args);sql.exec('COMMIT')}catch(e){sql.exec('ROLLBACK');throw e}}};
+ const env={DB:db,PUBLIC_ORIGIN:'https://vdrive-qa.example',LEAD_HMAC_SECRET:'synthetic-test-only-do-not-deploy-secret',INTAKE_PRIVACY_APPROVED:'true'};
+ fs.mkdirSync(path.join(root,'docs/conversion/review'),{recursive:true});
+ browser=await puppeteer.launch({executablePath:'/Applications/Google Chrome.app/Contents/MacOS/Google Chrome',headless:true});
+ const p=await browser.newPage();p.on('pageerror',e=>errors.push(e.message));await p.setViewport({width:1440,height:1000});
+ await p.setRequestInterception(true);p.on('request',req=>/fonts\.(googleapis|gstatic)\.com/.test(req.url())?req.abort():req.continue());
+ await p.goto(base,{waitUntil:'domcontentloaded',timeout:30000});await p.waitForSelector('.finance-card-button',{timeout:20000});await p.waitForFunction(()=>['live','snapshot'].includes(document.documentElement.dataset.catalog),{timeout:24000});await p.evaluate(()=>document.documentElement.style.scrollBehavior='auto');await sleep(800);
+ check('external_font_failure_does_not_block_website',await p.$eval('h1',e=>!!e.textContent&&getComputedStyle(e).display!=='none'));
+ check('calculator_is_on_each_car_card',await p.evaluate(()=>document.querySelectorAll('.finance-card-button').length===document.querySelectorAll('.vehicle-card').length));
+ await p.click('.finance-card-button');await p.waitForFunction(()=>document.querySelector('#finance-dialog').open);
+ check('calculator_opens_without_contact_details',await p.$eval('#finance-dialog',d=>d.open));
+ check('no_personal_name_in_public_interface',await p.evaluate(()=>!document.body.textContent.includes('יובל')));
+ check('no_invented_default_rate',await p.$eval('#finance-rate',e=>e.value===''));
+ check('no_monthly_claim_before_input',await p.$eval('#finance-monthly',e=>e.textContent==='—'));
+ await p.click('#finance-example');check('example_rate_explicit',await p.$eval('#finance-example',e=>e.textContent.includes('לא הצעת אשראי')));
+ const values=await p.evaluate(()=>({price:window.VdriveApp.getCars()[0].asking_price,downPayment:Number(document.querySelector('#finance-down').value),annualRate:8,months:60,balloon:0,fees:0}));
+ const expected=calculateLoan(values).monthlyPayment,display=await p.$eval('#finance-monthly',e=>Number(e.textContent.replace(/[^\d.]/g,'')));
+ check('monthly_math_matches_shared_core',Math.abs(expected-display)<.01);
+ await p.evaluate(()=>{document.querySelector('#finance-balloon').value=20000;document.querySelector('#finance-balloon').dispatchEvent(new Event('input',{bubbles:true}))});
+ check('balloon_visible_beside_payment',await p.$eval('#finance-result-hint',e=>e.textContent.includes('20,000')));
+ check('balloon_in_final_payment',await p.$eval('#finance-final',e=>e.textContent.includes('20,000')));
+ await (await p.$('#finance-dialog')).screenshot({path:path.join(root,'docs/conversion/review','finance-1440.png')});
+ await p.click('#finance-request');check('finance_handoff_closes_dialog',await p.$eval('#finance-dialog',e=>!e.open));
+ check('finance_handoff_selects_intent',await p.$eval('input[name="lead-intent"][value="finance"]',e=>e.checked));
+ check('lead_contains_vehicle_and_calculation',await p.$eval('#lead-vehicle-summary',e=>!e.hidden&&e.textContent.includes('20,000')));
+ await p.click('#lead-submit');check('empty_contact_cannot_submit',await p.$eval('#lead-error',e=>!e.hidden));
+ await p.type('#lead-name','בדיקה סינתטית');await p.type('#lead-phone','0500000000');await p.click('#lead-consent');
+ await p.evaluate(()=>{window.__opened=null;window.open=url=>{window.__opened=String(url);return null}});await p.click('#lead-submit');
+ check('unconnected_mode_does_not_claim_saved',await p.$eval('#lead-success',e=>e.textContent.includes('לא נשמרה באתר')));
+ check('finance_whatsapp_to_yuval_with_context',await p.evaluate(()=>window.__opened.startsWith('https://wa.me/972544555365?text=')&&decodeURIComponent(window.__opened).includes('תשלום סיום')));
+ for(const width of [320,390,768,1440]){
+  await p.setViewport({width,height:900});await p.$eval('#contact',e=>e.scrollIntoView({behavior:'instant',block:'start'}));await sleep(500);
+  check('contact_no_page_overflow_'+width,await p.evaluate(()=>document.documentElement.scrollWidth===innerWidth));
+  check('phone_touch_size_'+width,await p.$eval('#lead-phone',e=>e.getBoundingClientRect().height>=44));
+  if(width===390||width===1440)await (await p.$('#contact')).screenshot({path:path.join(root,'docs/conversion/review',`contact-${width}.png`)});
+  await p.click('.finance-card-button');await p.waitForFunction(()=>document.querySelector('#finance-dialog').open);
+  check('finance_fits_'+width,await p.$eval('#finance-dialog',d=>{const r=d.getBoundingClientRect();return r.left>=0&&r.right<=innerWidth&&d.scrollWidth<=d.clientWidth+1}));
+  if(width===390)await (await p.$('#finance-dialog')).screenshot({path:path.join(root,'docs/conversion/review','finance-390.png')});await p.keyboard.press('Escape');
+ }
+ check('contact_details_not_in_browser_storage',await p.evaluate(()=>!JSON.stringify({...localStorage,...sessionStorage}).includes('0500000000')));
+ // Preserve key existing behavior with the added module loaded.
+ await p.setViewport({width:1440,height:1000});await p.$eval('#collection',e=>e.scrollIntoView({behavior:'instant'}));await sleep(1000);await p.type('#search','Honda');check('search_retained',await p.$$eval('.vehicle-card',es=>es.length===1&&es[0].textContent.includes('Honda')));await p.focus('#reset-filters');await p.keyboard.press('Enter');await p.waitForFunction(()=>document.querySelector('#search').value===''&&document.querySelectorAll('.vehicle-card').length>=2);check('reset_restores_all_cars',await p.$$eval('.vehicle-card',es=>es.length>=2));
+ await p.click('.like');check('favorites_retained',await p.$eval('#save-count',e=>e.textContent==='1'));
+ await p.focus('.vehicle-card:nth-child(1) .compare-input');await p.keyboard.press('Space');await p.waitForFunction(()=>document.querySelector('#compare-count').textContent==='1');await p.focus('.vehicle-card:nth-child(2) .compare-input');await p.keyboard.press('Space');await p.waitForFunction(()=>document.querySelector('#compare-count').textContent==='2');await p.focus('#open-compare');await p.keyboard.press('Enter');await p.waitForFunction(()=>document.querySelector('#compare-dialog').open);check('comparison_retained',await p.$eval('#compare-dialog',e=>e.open));await p.keyboard.press('Escape');
+ await p.focus('.vehicle-card [data-open]');await p.keyboard.press('Enter');await p.waitForFunction(()=>document.querySelector('#vehicle-dialog').open,{timeout:10000});check('vehicle_gallery_retained',await p.$eval('#vehicle-dialog',e=>e.open));const image=await p.$eval('#detail-main-photo',e=>e.src);await p.click('[data-photo-step="1"]');check('gallery_advances',image!==await p.$eval('#detail-main-photo',e=>e.src));await p.focus('[data-lead-vehicle]');await p.keyboard.press('Enter');await p.waitForFunction(()=>!document.querySelector('#vehicle-dialog').open,{timeout:10000});check('vehicle_specific_lead',await p.$eval('#lead-vehicle-summary',e=>!e.hidden));
+ await p.focus('.header [data-contact-open]');await p.keyboard.press('Enter');await p.waitForFunction(()=>document.querySelector('#contact-dialog').open,{timeout:10000});check('yuval_call_unchanged',await p.$eval('#contact-dialog a[href^="tel:"]',e=>e.getAttribute('href')==='tel:0544555365'));await p.keyboard.press('Escape');
+ // Configured intake: browser traffic intercepted into the real handler backed by isolated SQLite.
+ const s=await browser.newPage();s.on('pageerror',e=>errors.push(e.message));await s.setViewport({width:1280,height:900});
+ await s.evaluateOnNewDocument(()=>window.VDRIVE_INTAKE_CONFIG={enabled:true,endpoint:'/api/leads'});await s.setRequestInterception(true);
+ let simulateFailure=false,storedPayload;
+ s.on('request',async req=>{if(new URL(req.url()).pathname==='/api/leads'){if(simulateFailure){await req.respond({status:503,contentType:'application/json',body:JSON.stringify({saved:false,message:'בדיקת כשל שמירה'})});return}storedPayload=JSON.parse(req.postData());const r=await handleLead(new Request('https://vdrive-qa.example/api/leads',{method:'POST',headers:{origin:'https://vdrive-qa.example','content-type':'application/json','cf-connecting-ip':'192.0.2.1'},body:req.postData()}),env);await req.respond({status:r.status,contentType:'application/json',body:await r.text()})}else await req.continue()});
+ await s.goto(base,{waitUntil:'domcontentloaded',timeout:30000});await s.waitForSelector('.finance-card-button');await s.type('#lead-name','בדיקת שמירה');await s.type('#lead-phone','0500000000');await s.click('#lead-consent');await s.click('#lead-submit');await s.waitForFunction(()=>!document.querySelector('#lead-success').hidden&&document.querySelector('#lead-success').textContent.includes('נשמרה'));
+ check('server_receipt_after_persistence',sql.prepare('SELECT COUNT(*) AS n FROM vdrive_web_leads').get().n===1);
+ check('pending_outbox_not_delivery_claim',sql.prepare('SELECT state FROM vdrive_lead_outbox').get().state==='pending');
+ await s.evaluate(()=>{const original=window.VdriveApp;window.VdriveApp=Object.freeze({...original,getStatus:()=>({fresh:true,observedAt:new Date().toISOString()})})});
+ const firstKey=storedPayload.idempotencyKey;await s.click('#lead-submit');await s.waitForFunction(()=>!document.querySelector('#lead-submit').disabled);check('duplicate_click_one_lead',sql.prepare('SELECT COUNT(*) AS n FROM vdrive_web_leads').get().n===1&&storedPayload.idempotencyKey===firstKey);
+ simulateFailure=true;await s.type('#lead-name',' כשל');await s.click('#lead-submit');await s.waitForFunction(()=>!document.querySelector('#lead-error').hidden);
+ check('failed_save_not_success',await s.$eval('#lead-success',e=>e.hidden));check('failed_save_keeps_inputs',await s.$eval('#lead-phone',e=>e.value==='0500000000'));
+ await p.bringToFront();await p.evaluate(()=>document.documentElement.style.scrollBehavior='auto');await p.focus('.finance-card-button');await p.keyboard.press('Enter');await p.waitForFunction(()=>document.querySelector('#finance-dialog').open,{timeout:10000});await p.click('#finance-example');
+ await p.evaluate(()=>{const old=window.VdriveApp;const cars=old.getCars();window.VdriveApp=Object.freeze({...old,getCars:()=>cars.map((c,i)=>i===0?{...c,asking_price:c.asking_price+1000}:c)});window.dispatchEvent(new Event('vdrive:catalog-render'))});
+ check('changed_price_invalidates_calculation',await p.evaluate(()=>document.querySelector('#finance-request').disabled&&document.querySelector('#finance-monthly').textContent==='—'&&!document.querySelector('#finance-error').hidden));await p.keyboard.press('Escape');
+ check('no_javascript_errors',errors.length===0,{errors});
+ const report={timestamp:new Date().toISOString(),target:base,passed:results.filter(r=>r.passed).length,failed:results.filter(r=>!r.passed).length,results,limits:['Not published to ChatGPT Sites.','Browser intake tests use real handler and isolated SQLite behind a synthetic edge.','No real lead/call/WhatsApp message was sent.','No field conversion lift, physical iPhone or full accessibility certification.']};
+ fs.writeFileSync(path.join(root,'docs/conversion/BROWSER_ACCEPTANCE.json'),JSON.stringify(report,null,2));console.log('SUMMARY',report.passed,report.failed);await browser.close();
+})().catch(async e=>{console.error(e);fs.writeFileSync(path.join(root,'docs/conversion/BROWSER_FAILURE.json'),JSON.stringify({error:String(e),results,errors},null,2));if(browser)await browser.close();process.exit(1)});

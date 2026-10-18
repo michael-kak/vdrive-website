@@ -1,0 +1,193 @@
+{
+  "timestamp": "2026-10-18T18:37:44.710Z",
+  "target": "http://127.0.0.1:18744/studio/",
+  "passed": 44,
+  "failed": 0,
+  "results": [
+    {
+      "name": "external_font_failure_does_not_block_website",
+      "passed": true
+    },
+    {
+      "name": "calculator_is_on_each_car_card",
+      "passed": true
+    },
+    {
+      "name": "calculator_opens_without_contact_details",
+      "passed": true
+    },
+    {
+      "name": "no_personal_name_in_public_interface",
+      "passed": true
+    },
+    {
+      "name": "no_invented_default_rate",
+      "passed": true
+    },
+    {
+      "name": "no_monthly_claim_before_input",
+      "passed": true
+    },
+    {
+      "name": "example_rate_explicit",
+      "passed": true
+    },
+    {
+      "name": "monthly_math_matches_shared_core",
+      "passed": true
+    },
+    {
+      "name": "balloon_visible_beside_payment",
+      "passed": true
+    },
+    {
+      "name": "balloon_in_final_payment",
+      "passed": true
+    },
+    {
+      "name": "finance_handoff_closes_dialog",
+      "passed": true
+    },
+    {
+      "name": "finance_handoff_selects_intent",
+      "passed": true
+    },
+    {
+      "name": "lead_contains_vehicle_and_calculation",
+      "passed": true
+    },
+    {
+      "name": "empty_contact_cannot_submit",
+      "passed": true
+    },
+    {
+      "name": "unconnected_mode_does_not_claim_saved",
+      "passed": true
+    },
+    {
+      "name": "finance_whatsapp_to_yuval_with_context",
+      "passed": true
+    },
+    {
+      "name": "contact_no_page_overflow_320",
+      "passed": true
+    },
+    {
+      "name": "phone_touch_size_320",
+      "passed": true
+    },
+    {
+      "name": "finance_fits_320",
+      "passed": true
+    },
+    {
+      "name": "contact_no_page_overflow_390",
+      "passed": true
+    },
+    {
+      "name": "phone_touch_size_390",
+      "passed": true
+    },
+    {
+      "name": "finance_fits_390",
+      "passed": true
+    },
+    {
+      "name": "contact_no_page_overflow_768",
+      "passed": true
+    },
+    {
+      "name": "phone_touch_size_768",
+      "passed": true
+    },
+    {
+      "name": "finance_fits_768",
+      "passed": true
+    },
+    {
+      "name": "contact_no_page_overflow_1440",
+      "passed": true
+    },
+    {
+      "name": "phone_touch_size_1440",
+      "passed": true
+    },
+    {
+      "name": "finance_fits_1440",
+      "passed": true
+    },
+    {
+      "name": "contact_details_not_in_browser_storage",
+      "passed": true
+    },
+    {
+      "name": "search_retained",
+      "passed": true
+    },
+    {
+      "name": "reset_restores_all_cars",
+      "passed": true
+    },
+    {
+      "name": "favorites_retained",
+      "passed": true
+    },
+    {
+      "name": "comparison_retained",
+      "passed": true
+    },
+    {
+      "name": "vehicle_gallery_retained",
+      "passed": true
+    },
+    {
+      "name": "gallery_advances",
+      "passed": true
+    },
+    {
+      "name": "vehicle_specific_lead",
+      "passed": true
+    },
+    {
+      "name": "yuval_call_unchanged",
+      "passed": true
+    },
+    {
+      "name": "server_receipt_after_persistence",
+      "passed": true
+    },
+    {
+      "name": "pending_outbox_not_delivery_claim",
+      "passed": true
+    },
+    {
+      "name": "duplicate_click_one_lead",
+      "passed": true
+    },
+    {
+      "name": "failed_save_not_success",
+      "passed": true
+    },
+    {
+      "name": "failed_save_keeps_inputs",
+      "passed": true
+    },
+    {
+      "name": "changed_price_invalidates_calculation",
+      "passed": true
+    },
+    {
+      "name": "no_javascript_errors",
+      "passed": true,
+      "detail": {
+        "errors": []
+      }
+    }
+  ],
+  "limits": [
+    "Not published to ChatGPT Sites.",
+    "Browser intake tests use real handler and isolated SQLite behind a synthetic edge.",
+    "No real lead/call/WhatsApp message was sent.",
+    "No field conversion lift, physical iPhone or full accessibility certification."
+  ]
+}
