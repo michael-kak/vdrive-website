@@ -1,0 +1,105 @@
+{
+  "source": "https://v-drive.keez.co.il/",
+  "observed_at": "2026-10-18T16:13:23.087937+00:00",
+  "organization_id": "6a5f5684868c45cd884f15db",
+  "vehicles": [
+    {
+      "id": "6aa7c241a65d3e39293ca68d",
+      "manufacturer": "ב מ וו גרמניה",
+      "model": "218I",
+      "year": 2021,
+      "color": "אפור כהה מטלי",
+      "kilometers": 60000,
+      "asking_price": 114770,
+      "ownership": "01",
+      "trim_level": "SPORT",
+      "body_type": "סדאן",
+      "primary_image_url": "https://base44.app/api/apps/69e64d7537d27eabbbcc53b1/files/mp/public/69e64d7537d27eabbbcc53b1/95a5958b0_1000279519.webp",
+      "images": [
+        "https://base44.app/api/apps/69e64d7537d27eabbbcc53b1/files/mp/public/69e64d7537d27eabbbcc53b1/95a5958b0_1000279519.webp",
+        "https://base44.app/api/apps/69e64d7537d27eabbbcc53b1/files/mp/public/69e64d7537d27eabbbcc53b1/d700ffd3d_1000279520.webp",
+        "https://base44.app/api/apps/69e64d7537d27eabbbcc53b1/files/mp/public/69e64d7537d27eabbbcc53b1/50e8bcc8b_1000279521.webp",
+        "https://base44.app/api/apps/69e64d7537d27eabbbcc53b1/files/mp/public/69e64d7537d27eabbbcc53b1/d3669f52b_1000279522.webp",
+        "https://base44.app/api/apps/69e64d7537d27eabbbcc53b1/files/mp/public/69e64d7537d27eabbbcc53b1/f6ad7ee86_1000279523.webp",
+        "https://base44.app/api/apps/69e64d7537d27eabbbcc53b1/files/mp/public/69e64d7537d27eabbbcc53b1/927e74360_1000279524.webp",
+        "https://base44.app/api/apps/69e64d7537d27eabbbcc53b1/files/mp/public/69e64d7537d27eabbbcc53b1/d7e106e5c_1000279527.webp",
+        "https://base44.app/api/apps/69e64d7537d27eabbbcc53b1/files/mp/public/69e64d7537d27eabbbcc53b1/93b0499f7_1000279525.webp",
+        "https://base44.app/api/apps/69e64d7537d27eabbbcc53b1/files/mp/public/69e64d7537d27eabbbcc53b1/70b7f50f0_1000279526.webp",
+        "https://base44.app/api/apps/69e64d7537d27eabbbcc53b1/files/mp/public/69e64d7537d27eabbbcc53b1/442ec7101_1000279535.webp"
+      ]
+    },
+    {
+      "id": "6aa7a13fb23044a3ce47ed42",
+      "manufacturer": "הונדה אנגליה",
+      "model": "CIVIC 5D",
+      "year": 2019,
+      "color": "אפור מטל",
+      "kilometers": 91000,
+      "asking_price": 78770,
+      "ownership": "01",
+      "trim_level": "SPORT",
+      "body_type": "הצ'בק",
+      "primary_image_url": "https://base44.app/api/apps/69e64d7537d27eabbbcc53b1/files/mp/public/69e64d7537d27eabbbcc53b1/499b9b552_1000282815.webp",
+      "images": [
+        "https://base44.app/api/apps/69e64d7537d27eabbbcc53b1/files/mp/public/69e64d7537d27eabbbcc53b1/499b9b552_1000282815.webp",
+        "https://base44.app/api/apps/69e64d7537d27eabbbcc53b1/files/mp/public/69e64d7537d27eabbbcc53b1/322352efb_1000282816.webp",
+        "https://base44.app/api/apps/69e64d7537d27eabbbcc53b1/files/mp/public/69e64d7537d27eabbbcc53b1/95d52ad17_1000282817.webp",
+        "https://base44.app/api/apps/69e64d7537d27eabbbcc53b1/files/mp/public/69e64d7537d27eabbbcc53b1/6b3e229b5_1000282825.webp",
+        "https://base44.app/api/apps/69e64d7537d27eabbbcc53b1/files/mp/public/69e64d7537d27eabbbcc53b1/c201375c3_1000282824.webp",
+        "https://base44.app/api/apps/69e64d7537d27eabbbcc53b1/files/mp/public/69e64d7537d27eabbbcc53b1/bdccb41eb_1000282819.webp",
+        "https://base44.app/api/apps/69e64d7537d27eabbbcc53b1/files/mp/public/69e64d7537d27eabbbcc53b1/d55f8e358_1000282818.webp",
+        "https://base44.app/api/apps/69e64d7537d27eabbbcc53b1/files/mp/public/69e64d7537d27eabbbcc53b1/83f93193a_1000282820.webp"
+      ]
+    },
+    {
+      "id": "6a719ba5155cbfb4dbf7a4fb",
+      "manufacturer": "מזדה יפן",
+      "model": "CX-30",
+      "year": 2020,
+      "color": "שחור",
+      "kilometers": 130000,
+      "asking_price": 86900,
+      "ownership": "01",
+      "trim_level": "EXECUTIVE",
+      "body_type": "פנאי-שטח",
+      "primary_image_url": "https://base44.app/api/apps/69e64d7537d27eabbbcc53b1/files/mp/public/69e64d7537d27eabbbcc53b1/70e42ffdb_1000245188.jpg",
+      "images": [
+        "https://base44.app/api/apps/69e64d7537d27eabbbcc53b1/files/mp/public/69e64d7537d27eabbbcc53b1/70e42ffdb_1000245188.jpg",
+        "https://base44.app/api/apps/69e64d7537d27eabbbcc53b1/files/mp/public/69e64d7537d27eabbbcc53b1/300c7d93d_1000245189.jpg",
+        "https://base44.app/api/apps/69e64d7537d27eabbbcc53b1/files/mp/public/69e64d7537d27eabbbcc53b1/3242fd1f7_1000245190.jpg",
+        "https://base44.app/api/apps/69e64d7537d27eabbbcc53b1/files/mp/public/69e64d7537d27eabbbcc53b1/342988ec6_1000245193.jpg",
+        "https://base44.app/api/apps/69e64d7537d27eabbbcc53b1/files/mp/public/69e64d7537d27eabbbcc53b1/5e04f2c88_1000245195.jpg",
+        "https://base44.app/api/apps/69e64d7537d27eabbbcc53b1/files/mp/public/69e64d7537d27eabbbcc53b1/0385b5d44_1000245191.jpg",
+        "https://base44.app/api/apps/69e64d7537d27eabbbcc53b1/files/mp/public/69e64d7537d27eabbbcc53b1/10ac50975_1000245198.jpg",
+        "https://base44.app/api/apps/69e64d7537d27eabbbcc53b1/files/mp/public/69e64d7537d27eabbbcc53b1/26f5fdbd0_1000245197.jpg",
+        "https://base44.app/api/apps/69e64d7537d27eabbbcc53b1/files/mp/public/69e64d7537d27eabbbcc53b1/c83f5e420_1000245196.jpg",
+        "https://base44.app/api/apps/69e64d7537d27eabbbcc53b1/files/mp/public/69e64d7537d27eabbbcc53b1/8aa0ad866_1000245199.jpg"
+      ]
+    },
+    {
+      "id": "6a677a553e1d71edf0156ec0",
+      "manufacturer": "בי ווי די",
+      "model": "BYD DOLPHIN",
+      "year": 2024,
+      "color": "קרם",
+      "kilometers": 20000,
+      "asking_price": 91900,
+      "ownership": "00",
+      "trim_level": "COMFORT",
+      "body_type": "הצ'בק",
+      "primary_image_url": "https://base44.app/api/apps/69e64d7537d27eabbbcc53b1/files/mp/public/69e64d7537d27eabbbcc53b1/64da86adc_WhatsAppImage2026-07-22at1644141.jpeg",
+      "images": [
+        "https://base44.app/api/apps/69e64d7537d27eabbbcc53b1/files/mp/public/69e64d7537d27eabbbcc53b1/64da86adc_WhatsAppImage2026-07-22at1644141.jpeg",
+        "https://base44.app/api/apps/69e64d7537d27eabbbcc53b1/files/mp/public/69e64d7537d27eabbbcc53b1/bf4484cb0_WhatsAppImage2026-07-22at1644142.jpg",
+        "https://base44.app/api/apps/69e64d7537d27eabbbcc53b1/files/mp/public/69e64d7537d27eabbbcc53b1/c7d3891f6_WhatsAppImage2026-07-22at164414.jpeg",
+        "https://base44.app/api/apps/69e64d7537d27eabbbcc53b1/files/mp/public/69e64d7537d27eabbbcc53b1/76bc23a6d_WhatsAppImage2026-07-22at1644151.jpg",
+        "https://base44.app/api/apps/69e64d7537d27eabbbcc53b1/files/mp/public/69e64d7537d27eabbbcc53b1/33a45248c_WhatsAppImage2026-07-22at1644152.jpeg",
+        "https://base44.app/api/apps/69e64d7537d27eabbbcc53b1/files/mp/public/69e64d7537d27eabbbcc53b1/2fae6be6d_WhatsAppImage2026-07-22at1644153.jpeg",
+        "https://base44.app/api/apps/69e64d7537d27eabbbcc53b1/files/mp/public/69e64d7537d27eabbbcc53b1/18f28619c_WhatsAppImage2026-07-22at164415.jpeg",
+        "https://base44.app/api/apps/69e64d7537d27eabbbcc53b1/files/mp/public/69e64d7537d27eabbbcc53b1/a2a5f9b2e_WhatsAppImage2026-07-22at1644161.jpeg",
+        "https://base44.app/api/apps/69e64d7537d27eabbbcc53b1/files/mp/public/69e64d7537d27eabbbcc53b1/2231ef085_WhatsAppImage2026-07-22at1644162.jpeg",
+        "https://base44.app/api/apps/69e64d7537d27eabbbcc53b1/files/mp/public/69e64d7537d27eabbbcc53b1/c9a09d682_WhatsAppImage2026-07-22at164416.jpeg"
+      ]
+    }
+  ]
+}
